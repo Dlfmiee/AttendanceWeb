@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $stmt = $pdo->prepare("UPDATE settings SET setting_value = ? WHERE setting_key = 'activity_location'");
     $stmt->execute([$new_location]);
     
-    $success_msg = "Settings updated successfully!";
+    $success_msg = "Tetapan berjaya dikemaskini!";
 }
 
 // Fetch current settings
@@ -67,7 +67,7 @@ while ($row = $stmt->fetch()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Student Attendance</title>
+    <title>Papan Pemuka - Kehadiran Ahli</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -75,14 +75,14 @@ while ($row = $stmt->fetch()) {
     <div class="container">
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="dashboard.php" class="navbar-brand">BADMINTON <span>CLUB</span></a>
+        <a href="dashboard.php" class="navbar-brand">Pyour<span>Attendance</span></a>
         <div class="nav-links">
-            <a href="dashboard.php" class="active">Dashboard</a>
-            <a href="manage_students.php">Students</a>
+            <a href="dashboard.php" class="active">Papan Pemuka</a>
+            <a href="manage_students.php">Ahli</a>
             <a href="approve_members.php">Kelulusan Ahli <?php if($pending_count > 0): ?><span style="background: var(--danger-color); color: white; padding: 2px 6px; border-radius: 10px; font-size: 0.75rem; vertical-align: middle; margin-left: 5px;"><?= $pending_count ?></span><?php endif; ?></a>
-            <a href="mark_attendance.php">Mark Attendance</a>
-            <a href="view_reports.php">Reports</a>
-            <a href="logout.php" class="btn btn-danger" style="padding: 0.5rem 1rem; margin-left: 1rem; color: white;">Logout</a>
+            <a href="mark_attendance.php">Tanda Kehadiran</a>
+            <a href="view_reports.php">Laporan</a>
+            <a href="logout.php" class="btn btn-danger" style="padding: 0.5rem 1rem; margin-left: 1rem; color: white;">Log Keluar</a>
         </div>
     </nav>
 
@@ -91,8 +91,8 @@ while ($row = $stmt->fetch()) {
         <!-- Welcome Section -->
         <div class="mb-4" style="display: flex; justify-content: space-between; align-items: center;">
             <div>
-                <h1 style="font-size: 1.875rem; color: var(--text-main);">Welcome back, Admin <?= htmlspecialchars($_SESSION['name']) ?></h1>
-                <p style="color: var(--text-muted);">Here's what's happening today, <?= date('F j, Y') ?>.</p>
+                <h1 style="font-size: 1.875rem; color: var(--text-main);">Selamat kembali, Admin <?= htmlspecialchars($_SESSION['name']) ?></h1>
+                <p style="color: var(--text-muted);">Berikut adalah ringkasan hari ini, <?= date('d F Y') ?>.</p>
             </div>
             
             <?php if($pending_count > 0): ?>
@@ -159,15 +159,14 @@ while ($row = $stmt->fetch()) {
                 </div>
                 <?php if($total_marked_today < $stats['total_students']): ?>
                     <p style="text-align: center; font-size: 0.875rem; color: var(--warning-color); margin-top: 1rem;">
-                        Waiting on <?= $stats['total_students'] - $total_marked_today ?> student records.
+                        Menunggu <?= $stats['total_students'] - $total_marked_today ?> rekod ahli yang belum ditanda.
                     </p>
                 <?php endif; ?>
             </div>
         </div>
 
-        <!-- Activity Settings -->
         <div class="card">
-            <h2 style="margin-bottom: 1.5rem; font-size: 1.25rem;">Live Activity Settings (Public Page)</h2>
+            <h2 style="margin-bottom: 1.5rem; font-size: 1.25rem;">Tetapan Aktiviti Semasa (Halaman Awam)</h2>
             <form method="POST" action="" style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 1rem; align-items: flex-end;">
                 <input type="hidden" name="action" value="update_settings">
                 <div class="form-group" style="margin-bottom: 0;">
@@ -178,9 +177,9 @@ while ($row = $stmt->fetch()) {
                     <label class="form-label" for="activity_location">Tempat/Lokasi</label>
                     <input type="text" id="activity_location" name="activity_location" class="form-control" value="<?= htmlspecialchars($settings['activity_location'] ?? '') ?>" placeholder="Cth: Dewan Sukan" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Update Public Page</button>
+                <button type="submit" class="btn btn-primary">Kemaskini Halaman Awam</button>
             </form>
-            <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">These details appear on the split-screen public check-in page for students.</p>
+            <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">Maklumat ini akan dipaparkan pada skrin pendaftaran kehadiran pelajar di halaman utama.</p>
         </div>
     </div>
 </body>

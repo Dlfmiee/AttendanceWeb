@@ -18,18 +18,18 @@ $activity_location = $settings['activity_location'] ?? "Lokasi Sekolah";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Kehadiran - Student Attendance</title>
+    <title>Daftar Kehadiran - Kelab Badminton</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body style="margin: 0; padding: 0; overflow-x: hidden;">
 
     <nav class="public-navbar">
-        <a href="index.php" class="nav-brand">BADMINTON <span>CLUB</span></a>
+        <a href="index.php" class="nav-brand">Pyour<span>Attendance</span></a>
         <div class="nav-links">
             <a href="index.php" class="active">Utama</a>
             <a href="register.php" class="btn btn-primary">Daftar Ahli</a>
-            <a href="login.php" class="btn btn-outline-primary">Admin Login</a>
+            <a href="login.php" class="btn btn-primary">Log Masuk Admin</a>
         </div>
     </nav>
 
@@ -85,7 +85,7 @@ $activity_location = $settings['activity_location'] ?? "Lokasi Sekolah";
                     <div class="form-group" style="margin-bottom: 2rem;">
                         <label class="info-label" for="ic_no" style="color: var(--text-muted);">Kad Pengenalan :</label>
                         <input type="text" id="ic_no" name="ic_no" class="form-control" 
-                               placeholder="Nombor Kad Pengenalan Anda..." required autofocus
+                               placeholder="No. Kad Pengenalan" required autofocus
                                maxlength="14" style="padding: 1.25rem; font-size: 1.125rem; text-align: center; letter-spacing: 2px;">
                     </div>
 

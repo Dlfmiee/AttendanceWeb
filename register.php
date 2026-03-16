@@ -14,11 +14,11 @@ session_start();
 <body style="margin: 0; padding: 0; overflow-x: hidden;">
 
     <nav class="public-navbar">
-        <a href="index.php" class="nav-brand">BADMINTON <span>CLUB</span></a>
+        <a href="index.php" class="nav-brand">Pyour<span>Attendance</span></a>
         <div class="nav-links">
             <a href="index.php">Utama</a>
             <a href="register.php" class="btn btn-primary">Daftar Ahli</a>
-            <a href="login.php" class="btn btn-outline-primary">Admin Login</a>
+            <a href="login.php" class="btn btn-primary">Log Masuk Admin</a>
         </div>
     </nav>
 
@@ -52,20 +52,20 @@ session_start();
                     <div class="form-group">
                         <label class="info-label" for="ic_no" style="color: var(--text-muted);">Kad Pengenalan :</label>
                         <input type="text" id="ic_no" name="ic_no" class="form-control" 
-                               placeholder="Contoh: 060101121234" required autofocus
+                               placeholder="No. Kad Pengenalan" required autofocus
                                maxlength="12">
                     </div>
 
                     <div class="form-group">
                         <label class="info-label" for="name" style="color: var(--text-muted);">Nama Penuh :</label>
                         <input type="text" id="name" name="name" class="form-control" 
-                               placeholder="Nama Penuh Pelajar" required>
+                               placeholder="Nama Penuh" required>
                     </div>
 
                     <div class="form-group">
                         <label class="info-label" for="class" style="color: var(--text-muted);">Kelas :</label>
                         <input type="text" id="class" name="class" class="form-control" 
-                               placeholder="Contoh: 5 Sains 1" required>
+                               placeholder="Kelas" required>
                     </div>
 
                     <div style="text-align: center; margin-top: 3rem;">

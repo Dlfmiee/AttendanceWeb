@@ -45,21 +45,21 @@ $pending_students = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelulusan Keahlian - Attendance Manager</title>
+    <title>Kelulusan Ahli - Pengurusan Kehadiran</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="dashboard.php" class="navbar-brand">BADMINTON <span>CLUB</span></a>
+        <a href="dashboard.php" class="navbar-brand">Pyour<span>Attendance</span></a>
         <div class="nav-links">
-            <a href="dashboard.php">Dashboard</a>
-            <a href="manage_students.php">Students</a>
+            <a href="dashboard.php">Papan Pemuka</a>
+            <a href="manage_students.php">Ahli</a>
             <a href="approve_members.php" class="active">Kelulusan Ahli</a>
-            <a href="mark_attendance.php">Mark Attendance</a>
-            <a href="view_reports.php">Reports</a>
-            <a href="logout.php" class="btn btn-danger" style="padding: 0.5rem 1rem; margin-left: 1rem; color: white;">Logout</a>
+            <a href="mark_attendance.php">Tanda Kehadiran</a>
+            <a href="view_reports.php">Laporan</a>
+            <a href="logout.php" class="btn btn-danger" style="padding: 0.5rem 1rem; margin-left: 1rem; color: white;">Log Keluar</a>
         </div>
     </nav>
 

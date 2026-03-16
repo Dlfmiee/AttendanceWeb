@@ -49,7 +49,7 @@ if ($report_type === 'date') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reports - Student Attendance</title>
+    <title>Laporan - Kehadiran Ahli</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
         @media print {
@@ -73,14 +73,14 @@ if ($report_type === 'date') {
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="dashboard.php" class="navbar-brand">BADMINTON <span>CLUB</span></a>
+        <a href="dashboard.php" class="navbar-brand">Pyour<span>Attendance</span></a>
         <div class="nav-links">
-            <a href="dashboard.php">Dashboard</a>
-            <a href="manage_students.php">Students</a>
+            <a href="dashboard.php">Papan Pemuka</a>
+            <a href="manage_students.php">Ahli</a>
             <a href="approve_members.php">Kelulusan Ahli</a>
-            <a href="mark_attendance.php">Mark Attendance</a>
-            <a href="view_reports.php" class="active">Reports</a>
-            <a href="logout.php" class="btn btn-danger" style="padding: 0.5rem 1rem; margin-left: 1rem; color: white;">Logout</a>
+            <a href="mark_attendance.php">Tanda Kehadiran</a>
+            <a href="view_reports.php" class="active">Laporan</a>
+            <a href="logout.php" class="btn btn-danger" style="padding: 0.5rem 1rem; margin-left: 1rem; color: white;">Log Keluar</a>
         </div>
     </nav>
 
@@ -140,7 +140,7 @@ if ($report_type === 'date') {
         <div class="card">
             <?php if ($report_type === 'date'): ?>
                 <!-- Daily Summary Table -->
-                <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">Daily Summary for <?= date('d F Y', strtotime($filter_date)) ?></h2>
+                <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">Ringkasan Harian untuk <?= date('d F Y', strtotime($filter_date)) ?></h2>
                 
                 <?php if (count($report_data) > 0): ?>
                     <?php
@@ -148,7 +148,7 @@ if ($report_type === 'date') {
                         $d_total = count($report_data);
                         $d_present = 0; $d_absent = 0; $d_late = 0; $d_unmarked = 0;
                         foreach ($report_data as $row) {
-                            if ($row['status'] === 'Present') $d_present++;
+                        if ($row['status'] === 'Present') $d_present++;
                             elseif ($row['status'] === 'Absent') $d_absent++;
                             elseif ($row['status'] === 'Late') $d_late++;
                             else $d_unmarked++;
@@ -156,12 +156,12 @@ if ($report_type === 'date') {
                     ?>
                     
                     <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
-                        <span class="badge" style="font-size: 1rem; padding: 0.5rem 1rem; background: var(--bg-color); color: var(--text-main);">Total: <?= $d_total ?></span>
-                        <span class="badge badge-present" style="font-size: 1rem; padding: 0.5rem 1rem;">Present: <?= $d_present ?></span>
-                        <span class="badge badge-absent" style="font-size: 1rem; padding: 0.5rem 1rem;">Absent: <?= $d_absent ?></span>
-                        <span class="badge badge-late" style="font-size: 1rem; padding: 0.5rem 1rem;">Late: <?= $d_late ?></span>
+                        <span class="badge" style="font-size: 1rem; padding: 0.5rem 1rem; background: var(--bg-color); color: var(--text-main);">Jumlah: <?= $d_total ?></span>
+                        <span class="badge badge-present" style="font-size: 1rem; padding: 0.5rem 1rem;">Hadir: <?= $d_present ?></span>
+                        <span class="badge badge-absent" style="font-size: 1rem; padding: 0.5rem 1rem;">Tidak Hadir: <?= $d_absent ?></span>
+                        <span class="badge badge-late" style="font-size: 1rem; padding: 0.5rem 1rem;">Lewat: <?= $d_late ?></span>
                         <?php if($d_unmarked > 0): ?>
-                            <span class="badge" style="font-size: 1rem; padding: 0.5rem 1rem; background: #e5e7eb; color: var(--text-muted);">Not Marked: <?= $d_unmarked ?></span>
+                            <span class="badge" style="font-size: 1rem; padding: 0.5rem 1rem; background: #e5e7eb; color: var(--text-muted);">Belum Ditanda: <?= $d_unmarked ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -169,11 +169,11 @@ if ($report_type === 'date') {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>IC Number</th>
-                                    <th>Name</th>
-                                    <th>Class</th>
+                                    <th>No. Kad Pengenalan</th>
+                                    <th>Nama</th>
+                                    <th>Kelas</th>
                                     <th>Status</th>
-                                    <th>Notes</th>
+                                    <th>Nota</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -185,10 +185,10 @@ if ($report_type === 'date') {
                                         <td>
                                             <?php if ($row['status']): ?>
                                                 <span class="badge badge-<?= strtolower($row['status']) ?>">
-                                                    <?= htmlspecialchars($row['status']) ?>
+                                                    <?= $row['status'] === 'Present' ? 'Hadir' : ($row['status'] === 'Absent' ? 'Tidak Hadir' : 'Lewat') ?>
                                                 </span>
                                             <?php else: ?>
-                                                <span style="color: var(--text-muted); font-style: italic;">No Record</span>
+                                                <span style="color: var(--text-muted); font-style: italic;">Tiada Rekod</span>
                                             <?php endif; ?>
                                         </td>
                                         <td><?= htmlspecialchars($row['notes'] ?? '-') ?></td>
@@ -198,7 +198,7 @@ if ($report_type === 'date') {
                         </table>
                     </div>
                 <?php else: ?>
-                    <p class="text-center" style="color: var(--text-muted); padding: 2rem;">No students found to generate a report.</p>
+                    <p class="text-center" style="color: var(--text-muted); padding: 2rem;">Tiada rekod ahli ditemui untuk menjana laporan.</p>
                 <?php endif; ?>
 
             <?php elseif ($report_type === 'student' && !empty($filter_student)): ?>
@@ -215,16 +215,16 @@ if ($report_type === 'date') {
                     }
                 ?>
                 
-                <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">Attendance History: <?= htmlspecialchars($student_name) ?></h2>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Showing last 30 recorded days.</p>
+                <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">Sejarah Kehadiran: <?= htmlspecialchars($student_name) ?></h2>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Memaparkan rekod 30 hari terakhir.</p>
 
                 <?php if ($stats['Total'] > 0): ?>
                     <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
-                        <span class="badge" style="font-size: 1rem; padding: 0.5rem 1rem; background: var(--bg-color); color: var(--text-main);">Recorded Days: <?= $stats['Total'] ?></span>
+                        <span class="badge" style="font-size: 1rem; padding: 0.5rem 1rem; background: var(--bg-color); color: var(--text-main);">Jumlah Hari Berrekod: <?= $stats['Total'] ?></span>
                         
                         <?php $p_rate = round((($stats['Present'] + $stats['Late']) / $stats['Total']) * 100); ?>
                         <span class="badge" style="font-size: 1rem; padding: 0.5rem 1rem; background: <?= $p_rate >= 80 ? '#d1fae5' : ($p_rate >= 60 ? '#fef3c7' : '#fee2e2') ?>; color: var(--text-main);">
-                            Rate: <?= $p_rate ?>%
+                            Kadar: <?= $p_rate ?>%
                         </span>
                     </div>
 
@@ -232,9 +232,9 @@ if ($report_type === 'date') {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Date</th>
+                                    <th>Tarikh</th>
                                     <th>Status</th>
-                                    <th>Notes</th>
+                                    <th>Nota</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -243,7 +243,7 @@ if ($report_type === 'date') {
                                         <td><strong><?= date('d M Y, l', strtotime($row['date'])) ?></strong></td>
                                         <td>
                                             <span class="badge badge-<?= strtolower($row['status']) ?>">
-                                                <?= htmlspecialchars($row['status']) ?>
+                                                <?= $row['status'] === 'Present' ? 'Hadir' : ($row['status'] === 'Absent' ? 'Tidak Hadir' : 'Lewat') ?>
                                             </span>
                                         </td>
                                         <td><?= htmlspecialchars($row['notes'] ?: '-') ?></td>
@@ -253,12 +253,12 @@ if ($report_type === 'date') {
                         </table>
                     </div>
                 <?php else: ?>
-                    <p class="text-center" style="color: var(--text-muted); padding: 2rem;">No attendance records found for this student.</p>
+                    <p class="text-center" style="color: var(--text-muted); padding: 2rem;">Tiada rekod kehadiran ditemui untuk ahli ini.</p>
                 <?php endif; ?>
 
             <?php else: ?>
                 <div class="text-center" style="padding: 3rem; color: var(--text-muted);">
-                    <p>Please select a student above to view their report.</p>
+                    <p>Sila pilih ahli di atas untuk melihat laporan mereka.</p>
                 </div>
             <?php endif; ?>
         </div>

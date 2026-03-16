@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clean_ic = preg_replace('/[^0-9]/', '', $ic_no);
 
     if (empty($clean_ic)) {
-        header("Location: index.php?error=Please enter a valid IC number.");
+        header("Location: index.php?error=Sila masukkan nombor IC yang sah.");
         exit();
     }
 
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute([$student_id, $today]);
     
     if ($stmt->fetch()) {
-        header("Location: index.php?error=You have already marked your attendance for today!");
+        header("Location: index.php?error=Anda telah mendaftar kehadiran untuk hari ini!");
         exit();
     }
 
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: index.php?success=1&name=" . urlencode($student_name));
         exit();
     } catch (PDOException $e) {
-        header("Location: index.php?error=Database error. Please try again later.");
+        header("Location: index.php?error=Ralat pangkalan data. Sila cuba lagi nanti.");
         exit();
     }
 } else {

@@ -42,12 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         }
 
         $pdo->commit();
-        $success = "Attendance saved successfully for $submit_date.";
+        $success = "Kehadiran berjaya disimpan untuk tarikh $submit_date.";
         $selected_date = $submit_date; // Keep selected date active
 
     } catch (Exception $e) {
         $pdo->rollBack();
-        $error = "Error saving attendance: " . $e->getMessage();
+        $error = "Ralat menyimpan kehadiran: " . $e->getMessage();
     }
 }
 
@@ -66,7 +66,7 @@ if (!empty($all_students)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark Attendance - Student Attendance</title>
+    <title>Tanda Kehadiran - Kehadiran Ahli</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -98,14 +98,14 @@ if (!empty($all_students)) {
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="dashboard.php" class="navbar-brand">BADMINTON <span>CLUB</span></a>
+        <a href="dashboard.php" class="navbar-brand">Pyour<span>Attendance</span></a>
         <div class="nav-links">
-            <a href="dashboard.php">Dashboard</a>
-            <a href="manage_students.php">Students</a>
+            <a href="dashboard.php">Papan Pemuka</a>
+            <a href="manage_students.php">Ahli</a>
             <a href="approve_members.php">Kelulusan Ahli</a>
-            <a href="mark_attendance.php" class="active">Mark Attendance</a>
-            <a href="view_reports.php">Reports</a>
-            <a href="logout.php" class="btn btn-danger" style="padding: 0.5rem 1rem; margin-left: 1rem; color: white;">Logout</a>
+            <a href="mark_attendance.php" class="active">Tanda Kehadiran</a>
+            <a href="view_reports.php">Laporan</a>
+            <a href="logout.php" class="btn btn-danger" style="padding: 0.5rem 1rem; margin-left: 1rem; color: white;">Log Keluar</a>
         </div>
     </nav>
 
@@ -119,12 +119,12 @@ if (!empty($all_students)) {
         <?php endif; ?>
 
         <div class="card mb-4" style="display: flex; justify-content: space-between; align-items: center;">
-            <h2 style="font-size: 1.25rem;">Mark Attendance</h2>
+            <h2 style="font-size: 1.25rem;">Tanda Kehadiran</h2>
             
             <form method="GET" action="" style="display: flex; gap: 1rem; align-items: center;">
-                <label for="date-selector" style="font-weight: 500;">Select Date:</label>
+                <label for="date-selector" style="font-weight: 500;">Pilih Tarikh:</label>
                 <input type="date" id="date-selector" name="date" class="form-control" style="width: auto;" value="<?= htmlspecialchars($selected_date) ?>">
-                <button type="submit" class="btn btn-secondary">Load Date</button>
+                <button type="submit" class="btn btn-secondary">Lihat Tarikh</button>
             </form>
         </div>
 
@@ -138,11 +138,11 @@ if (!empty($all_students)) {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>IC Number</th>
-                                    <th>Name</th>
-                                    <th>Class</th>
+                                    <th>No. Kad Pengenalan</th>
+                                    <th>Nama</th>
+                                    <th>Kelas</th>
                                     <th>Status</th>
-                                    <th>Notes (Optional)</th>
+                                    <th>Nota (Pilihan)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -159,17 +159,17 @@ if (!empty($all_students)) {
                                         <td>
                                             <div class="radio-group">
                                                 <input type="radio" class="status-radio" id="present_<?= $sid ?>" name="attendance[<?= $sid ?>]" value="Present" <?= $current_status === 'Present' ? 'checked' : '' ?>>
-                                                <label for="present_<?= $sid ?>" class="status-label present">Present</label>
-
+                                                <label for="present_<?= $sid ?>" class="status-label present">Hadir</label>
+ 
                                                 <input type="radio" class="status-radio" id="absent_<?= $sid ?>" name="attendance[<?= $sid ?>]" value="Absent" <?= $current_status === 'Absent' ? 'checked' : '' ?>>
-                                                <label for="absent_<?= $sid ?>" class="status-label absent" style="border-left: none; border-right: none;">Absent</label>
-
+                                                <label for="absent_<?= $sid ?>" class="status-label absent" style="border-left: none; border-right: none;">Tidak Hadir</label>
+ 
                                                 <input type="radio" class="status-radio" id="late_<?= $sid ?>" name="attendance[<?= $sid ?>]" value="Late" <?= $current_status === 'Late' ? 'checked' : '' ?>>
-                                                <label for="late_<?= $sid ?>" class="status-label late">Late</label>
+                                                <label for="late_<?= $sid ?>" class="status-label late">Lewat</label>
                                             </div>
                                         </td>
                                         <td>
-                                            <input type="text" name="notes[<?= $sid ?>]" class="form-control" placeholder="Add optional note..." value="<?= htmlspecialchars($current_note) ?>">
+                                            <input type="text" name="notes[<?= $sid ?>]" class="form-control" placeholder="Tambah nota jika perlu..." value="<?= htmlspecialchars($current_note) ?>">
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -178,13 +178,13 @@ if (!empty($all_students)) {
                     </div>
                     
                     <div style="display: flex; justify-content: flex-end;">
-                        <button type="submit" class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 2rem;">Save Attendance for <?= date('d M Y', strtotime($selected_date)) ?></button>
+                        <button type="submit" class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 2rem;">Simpan Kehadiran untuk <?= date('d M Y', strtotime($selected_date)) ?></button>
                     </div>
                 </form>
             <?php else: ?>
                 <div class="text-center" style="padding: 3rem; color: var(--text-muted);">
-                    <p style="margin-bottom: 1rem;">No students found in the database.</p>
-                    <a href="manage_students.php" class="btn btn-primary">Add Students First</a>
+                    <p style="margin-bottom: 1rem;">Tiada ahli ditemui dalam pangkalan data.</p>
+                    <a href="manage_students.php" class="btn btn-primary">Tambah Ahli Terlebih Dahulu</a>
                 </div>
             <?php endif; ?>
         </div>
